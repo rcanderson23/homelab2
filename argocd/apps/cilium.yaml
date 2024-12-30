@@ -11,7 +11,7 @@ spec:
     helm:
       valueFiles:
           - $values/argocd/values/cilium.yaml
-  - repoURL: 'https://github.com/rcanderson23/homelab.git'
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
   project: default
