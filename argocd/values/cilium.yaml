@@ -9,6 +9,8 @@ operator:
 k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
+envoy:
+  enabled: false
 securityContext:
   capabilities:
     ciliumAgent:
