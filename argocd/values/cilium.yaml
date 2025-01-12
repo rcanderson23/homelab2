@@ -4,8 +4,6 @@ cgroup:
   hostRoot: /sys/fs/cgroup
 ipam:
   mode: kubernetes
-operator:
-  replicas: 1
 k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
