@@ -32,3 +32,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: home
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.192.1.112/28
