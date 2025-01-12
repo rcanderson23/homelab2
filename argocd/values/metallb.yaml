@@ -1,6 +1,7 @@
 prometheus:
+  serviceAccount: 
   serviceMonitor:
-    enabled: true
+    enabled: false
     speaker:
       additionalLabels:
         release: kps
