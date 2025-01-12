@@ -11,7 +11,7 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cilium
+  name: metallb
   namespace: argocd
 spec:
   sources:
