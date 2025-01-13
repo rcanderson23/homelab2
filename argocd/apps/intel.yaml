@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: intel-device-plugins-operator
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: https://intel.github.io/helm-charts/
+    chart: intel-device-plugins-operator
+    targetRevision: 0.31.1
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: intel-system
+---
+apiVersion: deviceplugin.intel.com/v1
+kind: GpuDevicePlugin
+metadata:
+  name: i915
+spec:
+  enableMonitoring: true
+  image: intel/intel-gpu-plugin:0.31.1
+  logLevel: 2
+  nodeSelector:
+    gpu: i915
+  preferredAllocationPolicy: none
+  sharedDevNum: 1
