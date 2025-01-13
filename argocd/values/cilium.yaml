@@ -29,3 +29,8 @@ securityContext:
     - SYS_RESOURCE
 l2announcements:
   enabled: true
+rollOutCiliumPods: true
+envoy:
+  enabled: false
+operator:
+  rollOutPods: true
