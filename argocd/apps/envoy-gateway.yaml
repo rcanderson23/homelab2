@@ -8,53 +8,11 @@ spec:
   - repoURL: docker.io
     chart: envoyproxy/gateway-helm
     targetRevision: 1.2.4
-    helm:
-      valuesObject:
-        podDisruptionBudget:
-          minAvailable: 1
-        
-        deployment:
-          envoyGateway:
-            resources:
-              limits:
-                memory: 1024Mi
-              requests:
-                cpu: 100m
-                memory: 256Mi
-            securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                - ALL
-              privileged: false
-              runAsNonRoot: true
-              runAsGroup: 65532
-              runAsUser: 65532
-              seccompProfile:
-                type: RuntimeDefault
-          ports:
-            - name: grpc
-              port: 18000
-              targetPort: 18000
-            - name: ratelimit
-              port: 18001
-              targetPort: 18001
-            - name: wasm
-              port: 18002
-              targetPort: 18002
-            - name: metrics
-              port: 19001
-              targetPort: 19001
-          replicas: 2
-          pod:
-            annotations:
-              prometheus.io/scrape: 'true'
-              prometheus.io/port: '19001'
-#      valueFiles:
-#          - $values/argocd/values/external-secrets.yaml
-#  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
-#    targetRevision: main
-#    ref: values
+    valueFiles:
+    - $values/argocd/values/envoy-gateway.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
   project: default
   syncPolicy:
     automated:

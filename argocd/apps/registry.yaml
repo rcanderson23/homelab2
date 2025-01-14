@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - name: registry
+        image: registry:2
+        env:
+        - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+          value: "/var/lib/registry"
+        volumeMounts:
+        - name: registry-storage
+          mountPath: "/var/lib/registry"
+      volumes:
+      - name: registry-storage
+        persistentVolumeClaim:
+          claimName: registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  selector:
+    app: registry
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  parentRefs:
+    - name: private-gateway
+      namespace: envoy-gateway
+  hostnames:
+  - registry.carsonanderson.net
+  rules:
+  - backendRefs:
+    - name: registry
+      port: 5000
