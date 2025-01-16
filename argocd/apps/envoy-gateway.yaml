@@ -8,8 +8,9 @@ spec:
   - repoURL: docker.io
     chart: envoyproxy/gateway-helm
     targetRevision: 1.2.4
-    valueFiles:
-    - $values/argocd/values/envoy-gateway.yaml
+    helm:
+      valueFiles:
+      - $values/argocd/values/envoy-gateway.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
