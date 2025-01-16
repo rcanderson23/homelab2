@@ -1,0 +1,25 @@
+roles: "app"
+proxyAddr: "carson.teleport.sh:443"
+enterprise: true
+joinParams:
+  method: "iam"
+  tokenName: "iam-token"
+apps:
+- name: awsconsole
+  uri: "https://console.aws.amazon.com/"
+  labels:
+    env: homelab
+clusterDomain: "cluster.local"
+updater:
+  enabled: false
+podSecurityPolicy:
+  enabled: false
+log:
+  format: json
+extraEnv:
+- name: AWS_REGION
+  value: us-west-2
+- name: AWS_CONTAINER_CREDENTIALS_FULL_URI
+  value: http://169.254.170.23:8080/v1/container-credentials
+- name: AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE
+  value: /var/run/secrets/kubernetes.io/serviceaccount/token

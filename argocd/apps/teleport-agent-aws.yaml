@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: teleport-agent-aws
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: https://charts.releases.teleport.dev
+    chart: teleport-kube-agent
+    targetRevision: 17.1.6
+    helm:
+      valueFiles:
+      - $values/argocd/values/teleport-agent-aws.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: teleport-agent-aws
