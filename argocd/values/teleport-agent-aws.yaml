@@ -9,6 +9,15 @@ apps:
   uri: "https://console.aws.amazon.com/"
   labels:
     env: homelab
+highAvailability:
+  replicaCount: 2
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+podMonitor:
+  enabled: true
+  additionalLabels:
+    release: kps
 clusterDomain: "cluster.local"
 updater:
   enabled: false
