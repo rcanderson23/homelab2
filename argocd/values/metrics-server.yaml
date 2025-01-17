@@ -1,0 +1,17 @@
+replicas: 2
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+defaultArgs:
+  - --cert-dir=/tmp
+  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+  - --kubelet-use-node-status-port
+  - --metric-resolution=15s
+  - --kubelet-insecure-tls
+metrics:
+  enabled: true
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kps
+  interval: 1m
