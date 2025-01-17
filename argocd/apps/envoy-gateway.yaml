@@ -134,7 +134,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
-  gatewayClassName: private
+  gatewayClassName: public
   infrastructure:
     parametersRef:
       group: gateway.envoyproxy.io
