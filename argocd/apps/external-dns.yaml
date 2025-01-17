@@ -11,14 +11,14 @@ spec:
   project: default
   sources:
   - chart: external-dns
+    repoURL: https://kubernetes-sigs.github.io/external-dns
+    targetRevision: 1.15.0
     helm:
       valueFiles:
       - $values/argocd/values/external-dns.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
-    repoURL: https://kubernetes-sigs.github.io/external-dns/
-    targetRevision: 1.15.0
   syncPolicy:
     automated:
       prune: true
