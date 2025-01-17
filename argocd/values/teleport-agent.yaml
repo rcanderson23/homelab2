@@ -17,6 +17,11 @@ podMonitor:
 apps:
 - name: grafana
   uri: http://kps-grafana.monitoring.svc.cluster.local.:80
+  public_addr: grafana.carson.teleport.sh
+  rewrite:
+    headers:
+    - "Origin: https://grafana.carson.teleport.sh"
+    - "Host: grafana.carson.teleport.sh"
   labels:
     env: homelab
     category: monitoring
