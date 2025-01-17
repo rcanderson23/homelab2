@@ -35,6 +35,11 @@ apps:
   labels:
     env: homelab
     category: cd
+- name: longhorn
+  uri: http://longhorn-frontend.longhorn-system.svc.cluster.local.:80
+  labels:
+    env: homelab
+    category: storage
 
 clusterDomain: "cluster.local"
 updater:
