@@ -13,9 +13,12 @@ spec:
   - chart: metrics-server
     helm:
       valueFiles:
-      - $values/argocd/values/metrics-server.yaml
+      - $values/argocd/apps/core/metrics-server/values.yaml
     repoURL: https://kubernetes-sigs.github.io/metrics-server/
     targetRevision: 3.12.2
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
   syncPolicy:
     automated:
       prune: true
