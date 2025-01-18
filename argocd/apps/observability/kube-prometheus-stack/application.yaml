@@ -12,14 +12,14 @@ spec:
     helm:
       releaseName: kps
       valueFiles:
-          - $values/argocd/values/kube-prometheus-stack.yaml
+          - $values/argocd/apps/observability/kube-prometheus-stack/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
   project: default
   syncPolicy:
     automated:
-      prune: true
+      #prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
