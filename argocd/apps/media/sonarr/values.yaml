@@ -43,7 +43,7 @@ controllers:
         env:
           TZ: "${TZ}"
           SONARR__INSTANCE_NAME: sonarr
-          SONARR__PORT: 8989
+          SONARR__PORT: &port 8989
           SONARR__APPLICATION_URL: "https://sonarr.carsonanderson.net"
           SONARR__AUTHENTICATION_METHOD: External
           SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
