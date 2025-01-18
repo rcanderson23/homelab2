@@ -55,6 +55,8 @@ metadata:
 spec:
   parentRefs:
     - name: public-gateway
+      kind: Gateway
+      group: gateway.networking.k8s.io
   hostnames:
     - carsonanderson.net
     - '*.carsonanderson.net'
@@ -63,6 +65,7 @@ spec:
       - type: RequestRedirect
         requestRedirect:
           scheme: https
+          statusCode: 302
       matches:
         - path:
             type: PathPrefix
