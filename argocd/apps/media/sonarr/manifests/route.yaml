@@ -14,7 +14,7 @@ spec:
     - backendRefs:
         - group: ""
           kind: Service
-          name: radarr
+          name: sonarr
           port: 8989
           weight: 1
       matches:
