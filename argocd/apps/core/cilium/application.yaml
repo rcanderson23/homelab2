@@ -10,34 +10,18 @@ spec:
     targetRevision: 1.16.5
     helm:
       valueFiles:
-          - $values/argocd/values/cilium.yaml
+          - $values/argocd/apps/core/cilium/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    directory:
+      include: 'argocd/apps/core/cilium/manifests/*'
   project: default
   syncPolicy:
     automated:
-      prune: true
+      #prune: true
       selfHeal: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
----
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumLoadBalancerIPPool
-metadata:
-  name: "pool"
-spec:
-  blocks:
-  - start: "10.192.1.112"
-    stop: "10.192.1.135"
----
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumL2AnnouncementPolicy
-metadata:
-  name: l2announcement-policy
-spec:
-  interfaces:
-  - ^enp+
-  externalIPs: true
-  loadBalancerIPs: true
