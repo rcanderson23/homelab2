@@ -1,0 +1,13 @@
+---
+apiVersion: deviceplugin.intel.com/v1
+kind: GpuDevicePlugin
+metadata:
+  name: i915
+spec:
+  enableMonitoring: true
+  image: intel/intel-gpu-plugin:0.31.1
+  logLevel: 2
+  nodeSelector:
+    gpu: i915
+  preferredAllocationPolicy: none
+  sharedDevNum: 1
