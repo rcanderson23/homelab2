@@ -15,7 +15,7 @@ spec:
     targetRevision: 1.15.0
     helm:
       valueFiles:
-      - $values/argocd/values/external-dns.yaml
+      - $values/argocd/apps/core/external-dns/value.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
