@@ -2,29 +2,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: sonarr
   namespace: argocd
 spec:
-  destination:
-    namespace: cert-manager
-    server: https://kubernetes.default.svc
-  project: default
   sources:
-  - chart: cert-manager
-    helm:
-      valueFiles:
-      - $values/argocd/apps/core/cert-manager/values.yaml
-    repoURL: https://charts.jetstack.io
-    targetRevision: 1.16.2
+  - repoURL: ghcr.io
+    chart: bjw-s/helm/app-template
+    targetRevision: 3.6.1
+    valueFiles:
+    - $values/argocd/apps/media/sonarr/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
-    path: 'argocd/apps/core/cert-manager/manifests'
+    path: 'argocd/apps/media/sonarr/manifests'
     targetRevision: main
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
+  destination:
+    namespace: media
+    server: https://kubernetes.default.svc

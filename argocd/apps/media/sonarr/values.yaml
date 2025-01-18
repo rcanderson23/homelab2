@@ -1,0 +1,76 @@
+global:
+  fullnameOverride: sonarr
+defaultPodOptions:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 80
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - plex
+            topologyKey: "kubernetes.io/hostname"
+
+controllers:
+  sonarr:
+    enabled: true
+    type: statefulset
+    replicas: 1
+    statefulset:
+      volumeClaimTemplates:
+        - name: config
+          accessMode: ReadWriteOnce
+          size: 2Gi
+          storageClass: longhorn
+          globalMounts:
+            - path: /config
+
+    pod:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+    containers:
+      app:
+        image:
+          repository: ghcr.io/onedr0p/sonarr
+          tag: 4.0.12.2823
+          pullPolicy: IfNotPresent
+        env:
+          TZ: "${TZ}"
+          SONARR__INSTANCE_NAME: sonarr
+          SONARR__PORT: 8989
+          SONARR__APPLICATION_URL: "https://sonarr.carsonanderson.net"
+          SONARR__AUTHENTICATION_METHOD: External
+          SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
+          SONARR__THEME: dark
+          SONARR__LOG_LEVEL: info
+        probes:
+          liveness:
+            enabled: false
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          requests:
+            cpu: 14m
+            memory: 256Mi
+service:
+  app:
+    primary: true
+    controller: sonarr
+    ports:
+      http:
+        port: *port
+persistence:
+  data:
+    enabled: true
+    type: nfs
+    server: "nas.carsonanderson.net"
+    path: /volume1/nfs
