@@ -42,7 +42,7 @@ stringData:
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
-  name: private
+  name: envoy
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
 ---
@@ -54,13 +54,19 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
-  gatewayClassName: private
+  gatewayClassName: envoy
   infrastructure:
     parametersRef:
       group: gateway.envoyproxy.io
       kind: EnvoyProxy
       name: private-proxy-config
   listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: base
       hostname: carsonanderson.net
       port: 443
@@ -120,13 +126,6 @@ spec:
               externalTrafficPolicy: Cluster
 ---
 apiVersion: gateway.networking.k8s.io/v1
-kind: GatewayClass
-metadata:
-  name: public
-spec:
-  controllerName: gateway.envoyproxy.io/gatewayclass-controller
----
-apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: public-gateway
@@ -134,13 +133,19 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
-  gatewayClassName: public
+  gatewayClassName: envoy
   infrastructure:
     parametersRef:
       group: gateway.envoyproxy.io
       kind: EnvoyProxy
       name: public-proxy-config
   listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: base
       hostname: carsonanderson.net
       port: 443
