@@ -1,19 +1,5 @@
 global:
   fullnameOverride: sonarr
-defaultPodOptions:
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 80
-          podAffinityTerm:
-            labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                    - plex
-            topologyKey: "kubernetes.io/hostname"
-
 controllers:
   sonarr:
     enabled: true
