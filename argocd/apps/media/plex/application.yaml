@@ -2,6 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
   name: plex
   namespace: argocd
 spec:
@@ -123,9 +125,3 @@ spec:
   destination:
     namespace: mediaserver
     server: https://kubernetes.default.svc
-  ignoreDifferences:
-  - group: "apps"
-    kind: "StatefulSet"
-    jqPathExpressions:
-      - ".spec.volumeClaimTemplates[].apiVersion"
-      - ".spec.volumeClaimTemplates[].kind"   
