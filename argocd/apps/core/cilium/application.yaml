@@ -15,8 +15,7 @@ spec:
     targetRevision: main
     ref: values
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
-    directory:
-      include: 'argocd/apps/core/cilium/manifests/*'
+    path: 'argocd/apps/core/cilium/manifests'
   project: default
   syncPolicy:
     automated:
