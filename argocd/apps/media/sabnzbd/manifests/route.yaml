@@ -1,0 +1,23 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sabnzbd
+  namespace: media
+spec:
+  parentRefs:
+    - name: private-gateway
+      namespace: envoy-gateway
+  hostnames:
+    - "sabnzbd.carsonanderson.net"
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: sabnzbd
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
