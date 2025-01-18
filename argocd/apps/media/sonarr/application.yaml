@@ -9,8 +9,9 @@ spec:
   - repoURL: ghcr.io
     chart: bjw-s/helm/app-template
     targetRevision: 3.6.1
-    valueFiles:
-    - $values/argocd/apps/media/sonarr/values.yaml
+    helm:
+      valueFiles:
+      - $values/argocd/apps/media/sonarr/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
