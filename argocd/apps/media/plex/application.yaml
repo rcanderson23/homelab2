@@ -123,5 +123,5 @@ spec:
     - CreateNamespace=true
     - ServerSideApply=true
   destination:
-    namespace: mediaserver
+    namespace: media
     server: https://kubernetes.default.svc
