@@ -1,0 +1,16 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  parentRefs:
+    - name: private-gateway
+      namespace: envoy-gateway
+  hostnames:
+  - registry.carsonanderson.net
+  rules:
+  - backendRefs:
+    - name: registry
+      port: 5000
