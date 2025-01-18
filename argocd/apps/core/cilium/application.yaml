@@ -10,7 +10,7 @@ spec:
     targetRevision: 1.16.5
     helm:
       valueFiles:
-          - $values/argocd/apps/core/cilium/values.yaml
+      - $values/argocd/apps/core/cilium/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
@@ -20,7 +20,7 @@ spec:
   project: default
   syncPolicy:
     automated:
-      #prune: true
+      prune: true
       selfHeal: true
   destination:
     server: https://kubernetes.default.svc

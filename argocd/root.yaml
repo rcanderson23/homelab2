@@ -7,9 +7,10 @@ spec:
   sources:
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
+    path: argocd/apps
     directory:
       recurse: true
-      include: "application.yaml"
+      include: "**/application.yaml"
   project: default
   syncPolicy:
     automated:
