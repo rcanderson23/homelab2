@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: teleport-agent
+  name: teleport-agent-aws
   namespace: argocd
 spec:
   sources:
@@ -10,7 +10,7 @@ spec:
     targetRevision: 17.1.6
     helm:
       valueFiles:
-      - $values/argocd/values/teleport-agent.yaml
+      - $values/argocd/apps/access/teleport-agent-aws/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
@@ -23,4 +23,4 @@ spec:
     - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
-    namespace: teleport-agent
+    namespace: teleport-agent-aws
