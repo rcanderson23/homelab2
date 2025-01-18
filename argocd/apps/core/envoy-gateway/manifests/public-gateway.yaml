@@ -1,0 +1,79 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: public-gateway
+  namespace: envoy-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  gatewayClassName: envoy
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: public-proxy-config
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: base
+      hostname: carsonanderson.net
+      port: 443
+      protocol: HTTPS
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: carsonanderson-net-tls
+    - name: wildcard
+      hostname: '*.carsonanderson.net'
+      port: 443
+      protocol: HTTPS
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: carsonanderson-net-tls
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: public-http-to-https-filter-redirect
+  namespace: envoy-gateway
+spec:
+  parentRefs:
+    - name: public-gateway
+  hostnames:
+    - carsonanderson.net
+    - '*.carsonanderson.net'
+  rules:
+    - filters:
+      - type: RequestRedirect
+        requestRedirect:
+          scheme: https
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: public-proxy-config
+  namespace: envoy-gateway
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        replicas: 3
+      envoyService:
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              externalTrafficPolicy: Cluster
