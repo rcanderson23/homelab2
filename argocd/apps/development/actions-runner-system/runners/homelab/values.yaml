@@ -1,6 +1,5 @@
 githubConfigUrl: https://github.com/rcanderson23/homelab2
 githubConfigSecret: gha-runners-config
-runnerGroup: homelab2
 minRunners: 1
 maxRunners: 3
 containerMode:
