@@ -4,7 +4,7 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true
-  name: homelab2-runners
+  name: homelab-aws-creds-runners
   namespace: argocd
 spec:
   sources:
@@ -13,12 +13,12 @@ spec:
     targetRevision: 0.10.1
     helm:
       valueFiles:
-      - $values/argocd/apps/development/actions-runner-system/runners/homelab/values.yaml
+      - $values/argocd/apps/development/actions-runner-system/runners/homelab-aws-creds/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
-    path: 'argocd/apps/development/actions-runner-system/runners/homelab/manifests'
+    path: 'argocd/apps/development/actions-runner-system/runners/homelab-aws-creds/manifests'
     targetRevision: main
   project: default
   syncPolicy:
