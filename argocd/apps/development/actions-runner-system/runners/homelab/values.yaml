@@ -12,5 +12,5 @@ containerMode:
       requests:
         storage: 25Gi
 controllerServiceAccount:
-  name: actions-runner-system
-  namespace: actions-runner-system-gha-rs-controller
+  name: actions-runner-system-gha-rs-controller
+  namespace: actions-runner-system
