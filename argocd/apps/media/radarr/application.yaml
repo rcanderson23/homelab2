@@ -2,6 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
   name: radarr
   namespace: argocd
 spec:
@@ -10,87 +12,14 @@ spec:
     chart: bjw-s/helm/app-template
     targetRevision: 3.6.1
     helm:
-      valuesObject:
-        global:
-          fullnameOverride: radarr
-        defaultPodOptions:
-          affinity:
-            podAntiAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 80
-                  podAffinityTerm:
-                    labelSelector:
-                      matchExpressions:
-                        - key: app.kubernetes.io/name
-                          operator: In
-                          values:
-                            - plex
-                    topologyKey: "kubernetes.io/hostname"
-
-        controllers:
-          radarr:
-            enabled: true
-            type: statefulset
-            replicas: 1
-            statefulset:
-              volumeClaimTemplates:
-                - name: config
-                  accessMode: ReadWriteOnce
-                  size: 2Gi
-                  storageClass: longhorn
-                  globalMounts:
-                    - path: /config
-
-            pod:
-              securityContext:
-                runAsUser: 1000
-                runAsGroup: 1000
-                fsGroup: 100
-                fsGroupChangePolicy: "OnRootMismatch"
-            containers:
-              app:
-                image:
-                  repository: ghcr.io/onedr0p/radarr
-                  tag: 5.17.2.9580
-                  pullPolicy: IfNotPresent
-                env:
-                  TZ: "${TZ}"
-                  RADARR__INSTANCE_NAME: radarr
-                  RADARR__PORT: &port 7878
-                  RADARR__APPLICATION_URL: "https://radarr.carsonanderson.net"
-                    #RADARR__API_KEY:
-                    #  valueFrom:
-                    #    secretKeyRef:
-                    #      name: radarr-secrets
-                    #      key: RADARR_API_KEY
-                  RADARR__AUTHENTICATION_METHOD: External
-                  RADARR__THEME: dark
-                  RADARR__LOG_LEVEL: info
-                probes:
-                  liveness:
-                    enabled: false
-                securityContext:
-                  allowPrivilegeEscalation: false
-                  capabilities:
-                    drop:
-                      - ALL
-                resources:
-                  requests:
-                    cpu: 14m
-                    memory: 256Mi
-        service:
-          app:
-            primary: true
-            controller: radarr
-            ports:
-              http:
-                port: *port
-        persistence:
-          data:
-            enabled: true
-            type: nfs
-            server: "nas.carsonanderson.net"
-            path: /volume1/nfs
+      valueFiles:
+      - $values/argocd/apps/media/radarr/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    path: 'argocd/apps/media/radarr/manifests'
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
