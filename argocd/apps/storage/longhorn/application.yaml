@@ -10,7 +10,7 @@ spec:
   - chart: longhorn
     helm:
       valueFiles:
-      - $values/argocd/apps/storage/longhorn-system/values.yaml
+      - $values/argocd/apps/storage/longhorn/values.yaml
     repoURL: https://charts.longhorn.io
     targetRevision: 1.7.2
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
