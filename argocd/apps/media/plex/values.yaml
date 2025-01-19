@@ -17,8 +17,8 @@ controllers:
       nodeSelector:
         gpu: "i915"
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
+        runAsUser: 1024
+        runAsGroup: 100
         fsGroup: 1000
         supplementalGroups:
           - 44
