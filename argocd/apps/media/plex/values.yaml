@@ -17,9 +17,9 @@ controllers:
       nodeSelector:
         gpu: "i915"
       securityContext:
-        runAsUser: 1024
-        runAsGroup: 100
-        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 100
         supplementalGroups:
           - 44
         fsGroupChangePolicy: "OnRootMismatch"
