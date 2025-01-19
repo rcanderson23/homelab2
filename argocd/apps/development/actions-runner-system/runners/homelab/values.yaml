@@ -1,0 +1,16 @@
+githubConfigUrl: https://github.com/rcanderson23/homelab2
+githubConfigSecret: gha-runners-config
+runnerGroup: homelab2
+minRunners: 1
+maxRunners: 3
+containerMode:
+  type: kubernetes
+  kubernetesModeWorkVolumeClaim:
+    accessModes: ["ReadWriteOnce"]
+    storageClassName: openebs-hostpath
+    resources:
+      requests:
+        storage: 25Gi
+controllerServiceAccount:
+  name: actions-runner-controller
+  namespace: actions-runner-system-gha-rs-controller

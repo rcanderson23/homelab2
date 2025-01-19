@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+  name: homelab2-runners
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: ghcr.io
+    chart: actions/actions-runner-controller-charts/gha-runner-scale-set
+    targetRevision: 0.10.1
+    helm:
+      valueFiles:
+      - $values/argocd/apps/development/actions-runner-system/workers/homelab/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    path: 'argocd/apps/development/actions-runner-system/workers/homelab/manifests'
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  destination:
+    namespace: arc-runners
+    server: https://kubernetes.default.svc
