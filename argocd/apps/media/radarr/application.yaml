@@ -2,9 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd.argoproj.io/compare-options: ServerSideDiff=true
-  name: sabnzbd
+  name: radarr
   namespace: argocd
 spec:
   sources:
@@ -14,7 +12,7 @@ spec:
     helm:
       valuesObject:
         global:
-          fullnameOverride: sabnzbd
+          fullnameOverride: radarr
         defaultPodOptions:
           affinity:
             podAntiAffinity:
@@ -30,7 +28,7 @@ spec:
                     topologyKey: "kubernetes.io/hostname"
 
         controllers:
-          sabnzbd:
+          radarr:
             enabled: true
             type: statefulset
             replicas: 1
@@ -38,16 +36,11 @@ spec:
               volumeClaimTemplates:
                 - name: config
                   accessMode: ReadWriteOnce
-                  size: 500Mi
+                  size: 2Gi
                   storageClass: longhorn
                   globalMounts:
                     - path: /config
-                - name: intermediate
-                  accessMode: ReadWriteOnce
-                  size: 100Gi
-                  storageClass: longhorn
-                  globalMounts:
-                    - path: /intermediate
+
             pod:
               securityContext:
                 runAsUser: 1000
@@ -57,36 +50,24 @@ spec:
             containers:
               app:
                 image:
-                  repository: ghcr.io/onedr0p/sabnzbd
-                  tag: 4.4.1
+                  repository: ghcr.io/onedr0p/radarr
+                  tag: 5.17.2.9580
                   pullPolicy: IfNotPresent
                 env:
-                  TZ: "America/Denver"
-                  SABNZBD__PORT: 8080
-                  SABNZBD__HOST_WHITELIST_ENTRIES: >-
-                    sabnzbd,
-                    sabnzbd.media,
-                    sabnzbd.media.svc,
-                    sabnzbd.media.svc.cluster,
-                    sabnzbd.carsonanderson.net,
-                    sabnzbd.carson.teleport.sh,
-                envFrom:
-                - secretRef:
-                    name: sabnzbd
+                  TZ: "${TZ}"
+                  RADARR__INSTANCE_NAME: radarr
+                  RADARR__PORT: &port 7878
+                  RADARR__APPLICATION_URL: "https://radarr.carsonanderson.net"
+                    #RADARR__API_KEY:
+                    #  valueFrom:
+                    #    secretKeyRef:
+                    #      name: radarr-secrets
+                    #      key: RADARR_API_KEY
+                  RADARR__AUTHENTICATION_METHOD: External
+                  RADARR__THEME: dark
+                  RADARR__LOG_LEVEL: info
                 probes:
-                  liveness: &probes
-                    enabled: true
-                    custom: true
-                    spec:
-                      httpGet:
-                        path: /api?mode=version
-                        port: 8080
-                      initialDelaySeconds: 0
-                      periodSeconds: 10
-                      timeoutSeconds: 1
-                      failureThreshold: 3
-                  readiness: *probes
-                  startup:
+                  liveness:
                     enabled: false
                 securityContext:
                   allowPrivilegeEscalation: false
@@ -95,17 +76,15 @@ spec:
                       - ALL
                 resources:
                   requests:
-                    cpu: 10m
-                    memory: 512Mi
-                  limits:
-                    memory: 8000Mi
+                    cpu: 14m
+                    memory: 256Mi
         service:
           app:
             primary: true
-            controller: sabnzbd
+            controller: radarr
             ports:
               http:
-                port: 8080
+                port: *port
         persistence:
           data:
             enabled: true
