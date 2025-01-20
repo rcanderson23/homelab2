@@ -11,8 +11,10 @@ spec:
     name: pushover
     template:
       data:
-        token: {{ .token }}
-        user_key: {{ .user_key }}
+        token: |-
+          {{ .token }}
+        user_key: |-
+          {{ .user_key }}
   data:
   - remoteRef:
       key: 7460e24f-8cf6-4382-8c1a-b26b014b5e61
