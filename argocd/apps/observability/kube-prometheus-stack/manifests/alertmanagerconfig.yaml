@@ -25,24 +25,24 @@ spec:
     - equal:
       - namespace
       - alertname
-      source_matchers:
+      sourceMatch:
       - severity = critical
-      target_matchers:
+      targetMatch:
       - severity =~ warning|info
     - equal:
       - namespace
       - alertname
-      source_matchers:
+      sourceMatch:
       - severity = warning
-      target_matchers:
+      targetMatch:
       - severity = info
     - equal:
       - namespace
-      source_matchers:
+      sourceMatch:
       - alertname = InfoInhibitor
-      target_matchers:
+      targetMatch:
       - severity = info
-    - target_matchers:
+    - targetMatch:
       - alertname = InfoInhibitor
   receivers:
     - name: "null"
