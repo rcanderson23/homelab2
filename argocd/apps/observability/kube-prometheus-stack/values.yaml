@@ -6,6 +6,8 @@ defaultRules:
 
 alertmanager:
   enabled: true
+  alertmanagerConfiguration:
+    name: alertmanager
   podDisruptionBudget:
     enabled: false
     minAvailable: 1

@@ -1,0 +1,22 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: pushover
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secretsmanager
+  target:
+    name: pushover
+    template:
+      data:
+        token: {{ .token }}
+        user_key: {{ .user_key }}
+  data:
+  - remoteRef:
+      key: 7460e24f-8cf6-4382-8c1a-b26b014b5e61
+    secretKey: token
+  - remoteRef:
+      key: 7a9e326f-3c7a-47ca-8d40-b26b014a7240
+    secretKey: user_key
