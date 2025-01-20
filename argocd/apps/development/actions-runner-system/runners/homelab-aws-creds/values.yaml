@@ -29,6 +29,7 @@ template:
         limits:
           cpu: 12
     - name: dind
+      image: docker:dind
       resources:
         limits:
           cpu: 12
