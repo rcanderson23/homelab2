@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+  name: loki
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: https://prometheus-community.github.io/helm-charts
+    chart: loki
+    targetRevision: 6.25.0
+    helm:
+      valueFiles:
+        - $values/argocd/apps/observability/loki/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    path: 'argocd/apps/observability/loki/manifests'
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: loki
