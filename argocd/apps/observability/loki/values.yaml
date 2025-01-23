@@ -53,3 +53,8 @@ sidecar:
     repository: ghcr.io/kiwigrid/k8s-sidecar
   rules:
     searchNamespace: ALL
+monitoring:
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: kps

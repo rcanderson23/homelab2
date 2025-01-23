@@ -4,21 +4,21 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true
-  name: loki
+  name: promtail
   namespace: argocd
 spec:
   sources:
   - repoURL: https://grafana.github.io/helm-charts
-    chart: loki
-    targetRevision: 6.25.0
+    chart: promtail
+    targetRevision: 6.16.6
     helm:
       valueFiles:
-        - $values/argocd/apps/observability/loki/values.yaml
+        - $values/argocd/apps/observability/promtail/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
-    path: 'argocd/apps/observability/loki/manifests'
+    path: 'argocd/apps/observability/promtail/manifests'
     targetRevision: main
   project: default
   syncPolicy:
@@ -30,4 +30,4 @@ spec:
     - ServerSideApply=true
   destination:
     server: https://kubernetes.default.svc
-    namespace: loki
+    namespace: promtail
