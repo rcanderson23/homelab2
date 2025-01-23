@@ -1,0 +1,9 @@
+fullnameOverride: smartctl-exporter
+serviceMonitor:
+  enabled: true
+  extraLabels:
+    release: kps
+prometheusRules:
+  enabled: true
+  extraLabels:
+    release: kps
