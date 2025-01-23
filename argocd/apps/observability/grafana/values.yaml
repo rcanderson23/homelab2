@@ -1,3 +1,5 @@
+rbac:
+  pspEnabled: false
 serviceMonitor:
   enabled: true
   labels:
