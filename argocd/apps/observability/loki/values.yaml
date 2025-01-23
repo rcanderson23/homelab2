@@ -26,6 +26,8 @@ loki:
           period: 24h
   limits_config:
     retention_period: 30d
+    per_stream_rate_limit: 512M
+    per_stream_rate_limit_burst: 1024M
 singleBinary:
   replicas: 1
   persistence:
