@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus-smartctl-exporter
-    targetRevision: 0.13.
+    targetRevision: 0.13.0
     helm:
       valueFiles:
         - $values/argocd/apps/observability/smartctl-exporter/values.yaml
