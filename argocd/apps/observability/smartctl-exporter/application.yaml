@@ -9,7 +9,7 @@ metadata:
 spec:
   sources:
   - repoURL: https://prometheus-community.github.io/helm-charts
-    chart: smartctl-exporter
+    chart: prometheus-smartctl-exporter
     targetRevision: 0.13.
     helm:
       valueFiles:
