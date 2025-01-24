@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: https://grafana.github.io/helm-charts
     chart: smartctl-exporter
-    targetRevision: 6.16.6
+    targetRevision: 0.13.0
     helm:
       valueFiles:
         - $values/argocd/apps/observability/smartctl-exporter/values.yaml
