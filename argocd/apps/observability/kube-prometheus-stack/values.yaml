@@ -22,7 +22,7 @@ alertmanager:
               storage: 10Gi
 
 grafana:
-  enabled: true
+  enabled: false
 kubeApiServer:
   enabled: true
 kubelet:
