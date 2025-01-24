@@ -16,7 +16,7 @@ podMonitor:
     release: kps
 apps:
 - name: grafana
-  uri: http://kps-grafana.monitoring.svc.cluster.local.:80
+  uri: http://grafana.grafana.svc.cluster.local.:80
   public_addr: grafana.carson.teleport.sh
   rewrite:
     headers:
