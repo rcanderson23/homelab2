@@ -59,7 +59,6 @@ dashboards:
       revision: 3
       datasource: Prometheus
     external-dns:
-      # renovate: depName="External-dns"
       gnetId: 15038
       revision: 3
       datasource: Prometheus
@@ -131,3 +130,28 @@ grafana.ini:
     org_role: Admin
   live:
     allowed_orgins: "https://grafana.carsonanderson.net,https://grafana.carson.teleport.sh"
+sidecar:
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+    labelValue: "1"
+    searchNamespace: ALL
+    enableNewTablePanelSyntax: false
+    multicluster:
+      etcd:
+        enabled: true
+  datasources:
+    enabled: true
+    defaultDatasourceEnabled: true
+    isDefaultDatasource: true
+
+    name: Prometheus
+    uid: prometheus
+    url: http://kps-prometheus.monitoring.svc.cluster.local.:9090
+    label: grafana_datasource
+    labelValue: "1"
+    alertmanager:
+      enabled: true
+      name: Alertmanager
+      uid: alertmanager
+      implementation: prometheus
