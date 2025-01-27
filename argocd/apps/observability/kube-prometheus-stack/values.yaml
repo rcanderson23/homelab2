@@ -12,6 +12,9 @@ alertmanager:
     enabled: false
     minAvailable: 1
   alertmanagerSpec:
+    replicas: 2
+    logFormat: json
+    podAntiAffinity: hard
     storage:
       volumeClaimTemplate:
         spec:
@@ -48,6 +51,9 @@ nodeExporter:
 prometheus:
   enabled: true
   prometheusSpec:
+    replicas: 2
+    logFormat: json
+    podAntiAffinity: hard
     retention: 30d
     storageSpec:
       volumeClaimTemplate:
