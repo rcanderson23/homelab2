@@ -82,7 +82,7 @@ spec:
     kubernetes:
       envoyDeployment:
         replicas: 3
-        podSpec:
+        pod:
           topologySpreadConstraints:
           - maxSkew: 1
             topologyKey: kubernetes.io/hostname
