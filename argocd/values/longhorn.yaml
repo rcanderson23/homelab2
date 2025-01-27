@@ -1,0 +1,7 @@
+defaultSettings:
+  defaultDataPath: /var/mnt/storage/longhorn
+metrics:
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: kps

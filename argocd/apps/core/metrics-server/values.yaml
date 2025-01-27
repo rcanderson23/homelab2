@@ -15,3 +15,13 @@ serviceMonitor:
   additionalLabels:
     release: kps
   interval: 1m
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - metrics-server
