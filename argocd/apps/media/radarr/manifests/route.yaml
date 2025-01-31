@@ -4,6 +4,8 @@ kind: HTTPRoute
 metadata:
   name: radarr
   namespace: media
+  labels:
+    dns.homelabtech.net/provider: externaldns
 spec:
   parentRefs:
     - name: private-gateway

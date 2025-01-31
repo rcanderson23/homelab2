@@ -9,6 +9,8 @@ route:
     enabled: true
     apiVersion: gateway.networking.k8s.io/v1
     kind: HTTPRoute
+    labels:
+      dns.homelabtech.net/provider: externaldns
     hostnames:
       - grafana.carsonanderson.net
     parentRefs:
