@@ -1,0 +1,23 @@
+agent:
+  affinity: {}
+  env:
+  - name: AWS_REGION
+    value: us-west-2
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        key: key-id
+        name: credentials
+  - name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: key
+        name: credentials
+useExistingMappingSecret: "mapping"
+webhook:
+  cert:
+    certManager:
+      enabled: true
+  enabled: true
+  mutatingWebhook:
+    enabled: true

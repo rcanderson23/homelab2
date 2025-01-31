@@ -1,0 +1,19 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mapping
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secretsmanager
+  target:
+    name: mapping
+    template:
+      data:
+        mappings.yaml: |-
+          {{ .mapping }}
+  data:
+  - remoteRef:
+      key: a22b0c1c-00d1-49ab-a42d-b276015ca6b3
+    secretKey: mapping

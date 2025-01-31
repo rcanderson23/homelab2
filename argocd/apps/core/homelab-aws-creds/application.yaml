@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+  name: homelab-aws-creds
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: https://github.com/rcanderson23/homelab-aws-creds
+    path: deploy/charts/homelab-aws-creds
+    targetRevision: v0.1.0
+    helm:
+      valueFiles:
+      - $values/argocd/apps/core/homelab-aws-creds/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    path: 'argocd/apps/core/homelab-aws-creds/manifests'
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: homelab-aws-creds
