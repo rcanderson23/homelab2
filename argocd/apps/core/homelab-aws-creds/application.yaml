@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: https://github.com/rcanderson23/homelab-aws-creds
     path: deploy/charts/homelab-aws-creds
-    targetRevision: v0.1.0
+    targetRevision: v0.1.1
     helm:
       valueFiles:
       - $values/argocd/apps/core/homelab-aws-creds/values.yaml
