@@ -1,5 +1,7 @@
 agent:
   affinity: {}
+  image:
+    tag: "v0.1.3"
   env:
   - name: AWS_REGION
     value: us-west-2
@@ -15,6 +17,8 @@ agent:
         name: credentials
 useExistingMappingSecret: "mapping"
 webhook:
+  image:
+    tag: "v0.1.3"
   cert:
     certManager:
       enabled: true
