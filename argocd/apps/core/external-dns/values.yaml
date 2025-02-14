@@ -3,6 +3,7 @@ serviceMonitor:
   additionalLabels:
     release: kps
 
+logLevel: debug
 triggerLoopOnEvent: true
 labelFilter: "dns.homelabtech.net/provider=externaldns"
 # -- _Kubernetes_ resources to monitor for DNS entries.

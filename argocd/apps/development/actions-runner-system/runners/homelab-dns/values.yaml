@@ -1,4 +1,4 @@
-githubConfigUrl: https://github.com/rcanderson23/homelab-aws-creds
+githubConfigUrl: https://github.com/rcanderson23/homelab-dns
 githubConfigSecret: gha-runners-config
 minRunners: 0
 maxRunners: 3
