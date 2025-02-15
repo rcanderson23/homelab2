@@ -1,7 +1,9 @@
 agent:
   affinity: {}
   image:
-    tag: "v0.1.3"
+    tag: "latest"
+    pullPolicy: "Always"
+    repository: "registry.carsonanderson.net/homelab/homelab-aws-creds"
   env:
   - name: AWS_REGION
     value: us-west-2

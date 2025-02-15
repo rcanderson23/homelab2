@@ -1,0 +1,82 @@
+pms:
+  storageClassName: longhorn
+  configStorage: 10Gi
+
+
+  # Enabling this will add nvidia.com/gpu: 1 to limits, and will set
+  # environment for the nvidia operator
+  gpu:
+    nvidia:
+      enabled: false
+
+  resources:
+    requests:
+      gpu.intel.com/i915: 1
+
+  # -- Add kubernetes liveness probe to pms container.
+  livenessProbe:
+    httpGet:
+      path: /identity
+      port: 32400
+    initialDelaySeconds: 60
+    periodSeconds: 60
+    timeoutSeconds: 1
+    failureThreshold: 3
+
+  # -- Add kubernetes readiness probe to pms container.
+  readinessProbe:
+    httpGet:
+      path: /identity
+      port: 32400
+    initialDelaySeconds: 60
+    periodSeconds: 60
+    timeoutSeconds: 1
+    failureThreshold: 3
+
+service:
+  type: ClusterIP
+  port: 32400
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+priorityClassName: ""
+
+# -- Common Labels for all resources created by this chart.
+commonLabels: {}
+
+extraEnv:
+  PLEX_CLAIM: ""
+  HOSTNAME: Plex
+  TZ: "America/Denver"
+# extraEnv:
+# This claim is optional, and is only used for the first startup of PMS
+# The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
+#   PLEX_CLAIM: "claim"
+#   HOSTNAME: "PlexServer"
+#   TZ: "Etc/UTC"
+#   PLEX_UPDATE_CHANNEL: "5"
+#   PLEX_UID: "uid of plex user"
+#   PLEX_GID: "group id of plex user"
+# a list of CIDRs that can use the server without authentication
+  # this is only used for the first startup of PMS
+#   ALLOWED_NETWORKS: "0.0.0.0/0"
+
+
+# -- Optionally specify additional volume mounts for the PMS and init containers.
+extraVolumeMounts: []
+# extraVolumeMounts:
+#   - name: dev-dri
+#     mountPath: /dev/dri
+
+# -- Optionally specify additional volumes for the pod.
+extraVolumes: []
+# extraVolumes:
+#   - name: dev-dri
+#     hostPath:
+#       path: /dev/dri
+#       type: Directory
+

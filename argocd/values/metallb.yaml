@@ -1,0 +1,14 @@
+prometheus:
+  serviceAccount: 
+  serviceMonitor:
+    enabled: false
+    speaker:
+      additionalLabels:
+        release: kps
+    controller:
+      additionalLabels:
+        release: kps
+  prometheusRule:
+    enabled: true
+    additionalLabels:
+      release: kps

@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: bjw-s
+  namespace: argocd
+stringData:
+  name: bjw-s
+  url: ghcr.io
+  type: helm
+  enableOCI: "true"
