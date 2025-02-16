@@ -1,9 +1,4 @@
 agent:
-  affinity: {}
-  image:
-    tag: "latest"
-    pullPolicy: "Always"
-    repository: "registry.carsonanderson.net/homelab/homelab-aws-creds"
   env:
   - name: AWS_REGION
     value: us-west-2
@@ -19,8 +14,6 @@ agent:
         name: credentials
 useExistingMappingSecret: "mapping"
 webhook:
-  image:
-    tag: "v0.1.3"
   cert:
     certManager:
       enabled: true
