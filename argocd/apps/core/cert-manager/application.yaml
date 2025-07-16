@@ -15,7 +15,7 @@ spec:
       valueFiles:
       - $values/argocd/apps/core/cert-manager/values.yaml
     repoURL: https://charts.jetstack.io
-    targetRevision: 1.16.2
+    targetRevision: 1.18.2
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
