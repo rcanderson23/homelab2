@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  labels:
+    release: kps
+  name: teleport-cloud-metrics
+spec:
+  scheme: HTTPS
+  scrapeInterval: 60s
+  staticConfigs:
+    - labels:
+        job: teleport-cloud-metrics
+      targets:
+        - carson.metrics.teleport.sh:443
+  tlsConfig:
+    ca:
+      secret:
+        key: svid_bundle.pem
+        name: teleport-cloud-metrics-client
+    cert:
+      secret:
+        key: svid.pem
+        name: teleport-cloud-metrics-client
+    keySecret:
+      key: svid_key.pem
+      name: teleport-cloud-metrics-client

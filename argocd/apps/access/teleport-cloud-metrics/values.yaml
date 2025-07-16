@@ -1,0 +1,17 @@
+clusterName: "carson.teleport.sh"
+teleportProxyAddress: "carson.teleport.sh:443"
+defaultOutput:
+  enabled: true
+persistence: "secret"
+tbotConfig: {}
+outputs:
+  - type: spiffe-svid
+    svid:
+      path: /_teleport-cloud/metrics-exporter/client
+    destination:
+      type: kubernetes_secret
+      name: teleport-cloud-metrics-client
+
+joinMethod: "iam"
+token: "teleport-cloud-metrics-client"
+teleportVersionOverride: "17.5.4"

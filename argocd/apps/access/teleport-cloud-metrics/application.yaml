@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: teleport-cloud-metrics
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: https://charts.releases.teleport.dev
+    chart: tbot
+    targetRevision: 17.2.0
+    helm:
+      valueFiles:
+      - $values/argocd/apps/access/teleport-cloud-metrics/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: teleport-cloud-metrics

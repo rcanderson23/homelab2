@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    release: kps
+  name: teleport-cloud-metrics
+spec:
+  jobLabel: tbot
+  namespaceSelector:
+    matchNames:
+    - teleport-cloud-metrics
+  podMetricsEndpoints:
+  - interval: 30s
+    path: /metrics
+    port: diagnostics
+  podTargetLabels:
+  - app.kubernetes.io/name
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tbot
