@@ -14,4 +14,4 @@ outputs:
 
 joinMethod: "iam"
 token: "teleport-cloud-metrics-client"
-teleportVersionOverride: "17.5.4"
+teleportVersionOverride: "18.1.4"
