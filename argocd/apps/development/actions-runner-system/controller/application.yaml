@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: ghcr.io
     chart: actions/actions-runner-controller-charts/gha-runner-scale-set-controller
-    targetRevision: 0.10.1
+    targetRevision: 0.12.1
     helm:
       valueFiles:
       - $values/argocd/apps/development/actions-runner-system/controller/values.yaml
