@@ -2,6 +2,9 @@ githubConfigUrl: https://github.com/rcanderson23/mesh-cni
 githubConfigSecret: gha-runners-config
 minRunners: 0
 maxRunners: 3
+controllerServiceAccount:
+  namespace: arc-system
+  name: actions-runner-system-gha-rs-controller
 # use full template otherwise unable to specify resources on dind
 template:
   spec:
