@@ -1,0 +1,29 @@
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: gha-runners-config
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: bitwarden-secretsmanager
+  target:
+    name: gha-runners-config
+    template:
+      data:
+        github_app_id: |-
+          {{ .ACTION_RUNNER_CONTROLLER_GITHUB_APP_ID }}
+        github_app_installation_id: |-
+          {{ .ACTION_RUNNER_CONTROLLER_GITHUB_INSTALLATION_ID }}
+        github_app_private_key: |-
+          {{ .ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY }}
+  data:
+  - remoteRef:
+      key: d8cf2d12-e2f5-461e-924b-b26a005a64a3
+    secretKey: ACTION_RUNNER_CONTROLLER_GITHUB_APP_ID
+  - remoteRef:
+      key: f30255cc-2b83-43ef-b441-b26a005b7846
+    secretKey: ACTION_RUNNER_CONTROLLER_GITHUB_INSTALLATION_ID
+  - remoteRef:
+      key: 6371d923-0e95-43fb-a964-b26a005afbf5
+    secretKey: ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY
