@@ -57,7 +57,14 @@ template:
     containers:
     - name: runner
       image: ghcr.io/actions/actions-runner:latest
-      command: ["/home/runner/run.sh"]
+      command:
+      - /bin/sh
+      - -c
+      - |
+        # Wait for Docker to be ready before starting runner
+        echo "Waiting for docker..."
+        until docker info >/dev/null 2>&1; do sleep 5; done
+        /home/runner/run.sh
       env:
         - name: DOCKER_HOST
           value: unix:///var/run/docker.sock
