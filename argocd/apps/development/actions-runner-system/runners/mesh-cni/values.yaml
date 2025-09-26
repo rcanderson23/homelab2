@@ -1,6 +1,6 @@
 githubConfigUrl: https://github.com/rcanderson23/mesh-cni
 githubConfigSecret: gha-runners-config
-minRunners: 0
+minRunners: 1
 maxRunners: 3
 controllerServiceAccount:
   namespace: arc-system
