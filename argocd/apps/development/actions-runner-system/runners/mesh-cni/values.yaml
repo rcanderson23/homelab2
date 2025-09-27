@@ -54,6 +54,8 @@ template:
           mountPath: /var/run
         - name: dind-externals
           mountPath: /home/runner/externals
+        - name: dind-config
+          mountPath: /etc/docker
     containers:
     - name: runner
       image: ghcr.io/actions/actions-runner:latest
@@ -82,3 +84,6 @@ template:
       emptyDir: {}
     - name: dind-externals
       emptyDir: {}
+    - name: dind-config
+      configMap:
+        name: dind-config
