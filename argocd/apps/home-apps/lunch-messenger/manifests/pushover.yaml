@@ -15,6 +15,10 @@ spec:
           {{ .token }}
         PUSHOVER_USER_KEY: |-
           {{ .user_key }}
+        DISTRICT: |-
+          {{ .district }}
+        SCHOOL: |-
+          {{ .school }}
   data:
   - remoteRef:
       key: 4eebfacf-4915-4afe-8d5d-b3b6017a9e70
@@ -22,3 +26,10 @@ spec:
   - remoteRef:
       key: 7a9e326f-3c7a-47ca-8d40-b26b014a7240
     secretKey: user_key
+  - remoteRef:
+      key: 
+    secretKey: district
+  - remoteRef:
+      key: 7a9e326f-3c7a-47ca-8d40-b26b014a7240
+    secretKey: school
+
