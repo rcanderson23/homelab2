@@ -27,9 +27,9 @@ spec:
       key: 7a9e326f-3c7a-47ca-8d40-b26b014a7240
     secretKey: user_key
   - remoteRef:
-      key: 
+      key: 9cdf64c8-a06d-45f4-9a52-b3b801657613
     secretKey: district
   - remoteRef:
-      key: 7a9e326f-3c7a-47ca-8d40-b26b014a7240
+      key: 9599b5ec-314c-497e-9283-b3b801663b89
     secretKey: school
 
