@@ -10,7 +10,7 @@ spec:
     targetRevision: 0.27.0
     helm:
       valueFiles:
-      - $values/argocd/development/cnpg-system/values.yaml
+      - $values/argocd/apps/development/cnpg-system/values.yaml
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
