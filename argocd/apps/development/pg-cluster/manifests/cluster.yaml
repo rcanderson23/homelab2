@@ -18,6 +18,9 @@ spec:
     storageClass: openebs-hostpath
   enableSuperuserAccess: true
   postgresql:
+    pg_hba:
+      - hostssl teleport all 0.0.0.0/0 cert
+      - hostssl teleport_events all 0.0.0.0/0 cert
     parameters:
       max_connections: "400"
   resources:
