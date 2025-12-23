@@ -19,6 +19,20 @@ clusterName: "teleport.carsonanderson.net"
 kubeClusterName: "homelab"
 
 auth:
+  extraVolumeMounts:
+    - mountPath: /pg-client
+      name: pg-client
+      readOnly: true
+    - mountPath: /pg-server
+      name: pg-server
+      readOnly: true
+  extraVolumes:
+    - name: pg-client
+      secret:
+        secretName: pg-client
+    - name: pg-server
+      secret:
+        secretName: pg-server-ca
   teleportConfig:
     teleport:
       diag_addr: "0.0.0.0:3000"
