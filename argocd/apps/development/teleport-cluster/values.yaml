@@ -42,7 +42,7 @@ auth:
       authentication:
         type: local
       listen_addr: 0.0.0.0:3025
-      license_file: /var/lib/teleport/license.pem
+      license_file: /var/lib/license/license.pem
       proxy_listener_mode: multiplex
       tunnel_strategy:
         type: proxy_peering

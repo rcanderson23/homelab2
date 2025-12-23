@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: teleport-tls
+spec:
+  secretName: teleport-tls
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  dnsNames:
+  - teleport.carsonanderson.net
+  - "*.teleport.carsonanderson.net"
+  usages:
+  - digital signature 
+  - key encipherment
+  - server auth
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
