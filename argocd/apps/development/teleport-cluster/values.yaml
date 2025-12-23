@@ -83,6 +83,9 @@ proxy:
           extra_fields: [level, timestamp, component, caller]
       auth_servers:
         - teleport-cluster-auth:3025
+      join_params:
+        method: kubernetes
+        token_name: proxy-join
     auth_service:
       enabled: false
     proxy_service:
