@@ -39,7 +39,7 @@ spec:
   secretName: pg-replication-cert
   usages:
     - client auth
-  commonName: replication
+  commonName: streaming_replica
   issuerRef:
     name: pg-client-issuer
     kind: ClusterIssuer

@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://datreeio.github.io/CRDs-catalog/postgresql.cnpg.io/cluster_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.7
+  instances: 3
+  certificates:
+    serverCASecret: pg-server-ca
+    serverTLSSecret: pg-server
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 50Gi
+    storageClass: openebs-hostpath
+  enableSuperuserAccess: true
+  postgresql:
+    parameters:
+      max_connections: "400"
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 4Gi
+    limits:
+      memory: 4Gi
+  monitoring:
+    enablePodMonitor: true
