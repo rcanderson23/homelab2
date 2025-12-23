@@ -5,7 +5,7 @@ kind: Cluster
 metadata:
   name: postgres
 spec:
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.7
+  imageName: ghcr.io/rcanderson23/homelab2/postgresql:17
   instances: 3
   certificates:
     serverCASecret: pg-server-cert
