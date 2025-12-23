@@ -9,7 +9,9 @@ spec:
   instances: 3
   certificates:
     serverCASecret: pg-server-ca
-    serverTLSSecret: pg-server
+    serverTLSSecret: pg-server-cert
+    clientCASecret: pg-replication-cert
+    replicationTLSSecret: pg-replication-cert
   primaryUpdateStrategy: unsupervised
   storage:
     size: 50Gi
