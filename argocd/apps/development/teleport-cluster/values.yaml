@@ -44,9 +44,9 @@ auth:
           extra_fields: [level, timestamp, component, caller]
       storage:
         type: postgres
-        conn_string: "postgres://teleport@postgres-rw.pg-cluster.svc:5432/teleport?sslmode=verify-full&sslcert=%2pg-client%2tls.crt&sslkey=%2pg-client%2tls.key&sslrootcert=%2pg-server%2ca.crt"
+        conn_string: "postgres://teleport@postgres-rw.pg-cluster.svc:5432/teleport?sslmode=verify-full&sslcert=%2Fpg-client%2Ftls.crt&sslkey=%2Fpg-client%2Ftls.key&sslrootcert=%2Fpg-server%2Fca.crt"
         audit_events_uri:
-        - "postgres://teleport@postgres-rw.pg-cluster.svc:5432/teleport_events?sslmode=verify-full?sslcert=%2pg-client%2tls.crt?sslkey=%2pg-client%2tls.key?sslrootcert=%2pg-server%2ca.crt"
+        - "postgres://teleport@postgres-rw.pg-cluster.svc:5432/teleport_events?sslmode=verify-full?sslcert=%2Fpg-client%2Ftls.crt?sslkey=%2Fpg-client%2Ftls.key?sslrootcert=%2Fpg-server%2Fca.crt"
         audit_sessions_uri: "s3://dev-teleport-sessions-carson.s3.amazonaws.com"
 
     proxy_service:
