@@ -40,6 +40,6 @@ spec:
     - client auth
   commonName: replication
   issuerRef:
-    name: client-issuer
+    name: pg-client-issuer
     kind: ClusterIssuer
     group: cert-manager.io
