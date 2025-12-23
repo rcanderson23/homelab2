@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pg-server-ca
+spec:
+  commonName: teleport
+  secretName: pg-server-ca
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: pg-server-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
