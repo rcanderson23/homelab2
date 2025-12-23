@@ -5,6 +5,7 @@ kind: Cluster
 metadata:
   name: postgres
 spec:
+  imagePullPolicy: Always
   imageName: ghcr.io/rcanderson23/homelab2/postgresql:17
   instances: 3
   certificates:
