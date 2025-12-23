@@ -1,0 +1,54 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pg-server-ca
+spec:
+  isCA: true
+  commonName: pg-server-ca
+  secretName: pg-server-ca
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: server-ca-issuer
+spec:
+  ca:
+    secretName: pg-server-ca
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pg-server-cert
+  labels:
+    cnpg.io/reload: ""
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pg-server
+spec:
+  secretName: pg-server-cert
+  usages:
+    - server auth
+  dnsNames:
+    - cluster-rw
+    - cluster-rw.pg-cluster.svc
+    - cluster-rw.pg-cluster.svc.cluster.local
+    - cluster-r
+    - cluster-r.pg-cluster.svc
+    - cluster-r.pg-cluster.svc.cluster.local
+    - cluster-ro
+    - cluster-ro.pg-cluster.svc
+    - cluster-ro.pg-cluster.svc.cluster.local
+  issuerRef:
+    name: server-ca-issuer
+    kind: Issuer
+    group: cert-manager.io
