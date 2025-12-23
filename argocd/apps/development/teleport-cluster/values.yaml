@@ -80,8 +80,8 @@ proxy:
       web_listen_addr: 0.0.0.0:3080
       public_addr: teleport.carsonanderson.net:443
       https_keypairs:
-      - key_file: /tls/tls.key
-        cert_file: /tls/tls.crt
+      - key_file: /etc/teleport-tls/tls.key
+        cert_file: /etc/teleport-tls/tls.crt
       https_keypairs_reload_interval: 1h
 
 
