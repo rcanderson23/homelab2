@@ -72,6 +72,9 @@ auth:
       access_monitoring: 
         enabled: no
 proxy:
+  annotations:
+    service:
+      external-dns.alpha.kubernetes.io/hostname: "teleport.carsonanderson.net,*.teleport.carsonanderson.net"
   teleportConfig:
     teleport:
       diag_addr: "0.0.0.0:3000"
