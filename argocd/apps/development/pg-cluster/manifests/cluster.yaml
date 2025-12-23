@@ -21,6 +21,7 @@ spec:
     pg_hba:
       - hostssl teleport all all cert
       - hostssl teleport_events all all cert
+      - hostssl postgres all all cert
     parameters:
       max_connections: "400"
   resources:
