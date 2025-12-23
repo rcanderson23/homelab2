@@ -73,6 +73,8 @@ proxy:
         format:
           output: json
           extra_fields: [level, timestamp, component, caller]
+      auth_servers:
+        - teleport-cluster-auth:3025
     auth_service:
       enabled: false
     proxy_service:
@@ -83,8 +85,6 @@ proxy:
       - key_file: /etc/teleport-tls/tls.key
         cert_file: /etc/teleport-tls/tls.crt
       https_keypairs_reload_interval: 1h
-      auth_servers:
-        - teleport-cluster-auth:3025
 
 
 authentication:
