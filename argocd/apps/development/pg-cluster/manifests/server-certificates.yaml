@@ -40,15 +40,15 @@ spec:
   usages:
     - server auth
   dnsNames:
-    - cluster-rw
-    - cluster-rw.pg-cluster.svc
-    - cluster-rw.pg-cluster.svc.cluster.local
-    - cluster-r
-    - cluster-r.pg-cluster.svc
-    - cluster-r.pg-cluster.svc.cluster.local
-    - cluster-ro
-    - cluster-ro.pg-cluster.svc
-    - cluster-ro.pg-cluster.svc.cluster.local
+    - postgres-rw
+    - postgres-rw.pg-cluster.svc
+    - postgres-rw.pg-cluster.svc.cluster.local
+    - postgres-r
+    - postgres-r.pg-cluster.svc
+    - postgres-r.pg-cluster.svc.cluster.local
+    - postgres-ro
+    - postgres-ro.pg-cluster.svc
+    - postgres-ro.pg-cluster.svc.cluster.local
   issuerRef:
     name: pg-server-ca-issuer
     kind: ClusterIssuer
