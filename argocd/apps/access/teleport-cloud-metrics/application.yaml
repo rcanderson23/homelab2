@@ -14,6 +14,9 @@ spec:
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    path: 'argocd/apps/access/teleport-cloud-metrics/manifests'
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
