@@ -13,12 +13,6 @@ spec:
       data:
         license.pem: |-
           {{ .license }}
-        PUSHOVER_USER_KEY: |-
-          {{ .user_key }}
-        DISTRICT: |-
-          {{ .district }}
-        SCHOOL: |-
-          {{ .school }}
   data:
   - remoteRef:
       key: c82794f8-bf53-4d83-91a6-b3bb0174eb9b

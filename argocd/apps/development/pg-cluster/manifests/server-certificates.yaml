@@ -3,6 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pg-server-ca
+  namespace: cert-manager
 spec:
   isCA: true
   commonName: pg-server-ca
@@ -16,9 +17,9 @@ spec:
     group: cert-manager.io
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: server-ca-issuer
+  name: pg-server-ca-issuer
 spec:
   ca:
     secretName: pg-server-ca
@@ -49,6 +50,6 @@ spec:
     - cluster-ro.pg-cluster.svc
     - cluster-ro.pg-cluster.svc.cluster.local
   issuerRef:
-    name: server-ca-issuer
-    kind: Issuer
+    name: pg-server-ca-issuer
+    kind: ClusterIssuer
     group: cert-manager.io

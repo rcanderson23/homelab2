@@ -30,15 +30,22 @@ auth:
           extra_fields: [level, timestam    storage:
       storage:
         type: postgres
-        conn_string: "postgres://.cluster.local:5432/teleport?sslmode=verify-full?cert"
+        conn_string: "postgres://postgres-rw.pg-cluster.svc:5432/teleport?sslmode=verify-full?sslcert=/pg-client/tls.crt?sslkey=/pg-client/tls.key?cacert=/pg-server/ca.crt"
 
-        # If you need explicit TLS files:
-        # ca_file: /etc/teleport/db-ca.crt
-        # cert_file: /etc/teleport/db-client.crt
-        # key_file: /etc/teleport/db-client.keyp, component, caller]
     proxy_service:
       enabled: false
     auth_service:
+      enabled: true
+      authentication:
+        type: local
+      listen_addr: 0.0.0.0:3025
+      license_file: /var/lib/teleport/license.pem
+      proxy_listener_mode: multiplex
+      tunnel_strategy:
+        type: proxy_peering
+        agent_connection_count: 1
+      access_monitoring: 
+        enabled: no
 proxy:
   teleportConfig:
     teleport:
