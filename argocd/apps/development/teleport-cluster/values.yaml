@@ -27,10 +27,13 @@ auth:
         severity: INFO
         format:
           output: json
-          extra_fields: [level, timestam    storage:
+          extra_fields: [level, timestamp, component, caller]
       storage:
         type: postgres
         conn_string: "postgres://postgres-rw.pg-cluster.svc:5432/teleport?sslmode=verify-full?sslcert=/pg-client/tls.crt?sslkey=/pg-client/tls.key?cacert=/pg-server/ca.crt"
+        audit_events_uri:
+        - "postgres://postgres-rw.pg-cluster.svc:5432/teleport-events?sslmode=verify-full?sslcert=/pg-client/tls.crt?sslkey=/pg-client/tls.key?cacert=/pg-server/ca.crt"
+        audit_sessions_uri: "s3://dev-teleport-sessions-carson.s3.amazonaws.com"
 
     proxy_service:
       enabled: false
