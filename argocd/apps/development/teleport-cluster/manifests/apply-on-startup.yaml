@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apply-on-startup
+data:
+  startup.yaml: |-
+    kind: token
+    version: v2
+    metadata:
+      name: proxy-join
+      # set a long expiry time, the default for tokens is only 30 minutes
+      expires: "2050-01-01T00:00:00Z"
+    spec:
+      roles: [Proxy]
+      join_method: kubernetes
+      kubernetes:
+        type: in_cluster
+        allow:
+          - service_account: "teleport-cluster:teleport-cluster-proxy"
+
