@@ -223,7 +223,8 @@ image: public.ecr.aws/gravitational/teleport-distroless
 # Enterprise version of the image. By default, the image contains only the
 # Teleport application and its runtime dependencies, and does not contain a
 # shell.
-enterpriseImage: public.ecr.aws/gravitational/teleport-ent-distroless
+enterpriseImage: registry.carsonanderson.net/teleport
+teleportVersionOverride: 18.5.0-carson-crdb-2319a442c1-20260105-1017
 # Optional array of imagePullSecrets, to use when pulling from a private registry
 imagePullSecrets: []
 # Teleport logging configuration
