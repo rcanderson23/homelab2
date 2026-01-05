@@ -56,6 +56,7 @@ auth:
         audit_events_uri:
         - "postgres://teleport@postgres-rw.pg-cluster.svc:5432/teleport_events?sslmode=verify-full&sslcert=/pg-client/tls.crt&sslkey=/pg-client/tls.key&sslrootcert=/pg-server/ca.crt"
         audit_sessions_uri: "s3://dev-teleport-sessions-carson.s3.amazonaws.com"
+        client_cert_reload_interval: 1h
 
     proxy_service:
       enabled: false
