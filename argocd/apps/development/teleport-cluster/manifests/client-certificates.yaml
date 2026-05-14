@@ -13,3 +13,5 @@ spec:
     name: pg-client-issuer
     kind: ClusterIssuer
     group: cert-manager.io
+  duration: 3h
+  renewBefore: 1h
