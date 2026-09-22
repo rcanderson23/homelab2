@@ -7,7 +7,7 @@ spec:
   sources:
   - repoURL: https://charts.releases.teleport.dev
     chart: tbot
-    targetRevision: 17.2.0
+    targetRevision: 18.11.1
     helm:
       valueFiles:
       - $values/argocd/apps/access/teleport-cloud-metrics/values.yaml
