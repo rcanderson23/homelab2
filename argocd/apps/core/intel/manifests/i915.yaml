@@ -5,7 +5,7 @@ metadata:
   name: i915
 spec:
   enableMonitoring: true
-  image: intel/intel-gpu-plugin:0.31.1
+  image: intel/intel-gpu-plugin:0.31.1@sha256:31f4543e44fca9c6b3fb116293318bdd50158d1bbc00ffb8c9c24b40a6893c35
   logLevel: 2
   nodeSelector:
     gpu: i915

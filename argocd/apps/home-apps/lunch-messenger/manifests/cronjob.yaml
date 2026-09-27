@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: lunch-messenger
-            image: ghcr.io/rcanderson23/lunch-messenger:latest
+            image: ghcr.io/rcanderson23/lunch-messenger:latest@sha256:a2f4038a02a644c3701d8a40533975111357234a4020e978b30441f5874ccd38
             envFrom:
             - secretRef:
                 name: pushover-credentials
