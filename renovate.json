@@ -1,0 +1,57 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "docker:pinDigests"
+  ],
+  "dependencyDashboard": true,
+  "argocd": {
+    "managerFilePatterns": [
+      "/^argocd/.+\\.ya?ml$/"
+    ]
+  },
+  "kubernetes": {
+    "managerFilePatterns": [
+      "/^argocd/apps/.+/manifests/.+\\.ya?ml$/",
+      "/^registry/.+\\.ya?ml$/"
+    ]
+  },
+  "helm-values": {
+    "managerFilePatterns": [
+      "/(^|/)values\\.ya?ml$/",
+      "/^argocd/values/.+\\.ya?ml$/",
+      "/^values2\\.ya?ml$/"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Group Helm chart updates",
+      "matchManagers": [
+        "argocd"
+      ],
+      "matchDatasources": [
+        "helm",
+        "docker"
+      ],
+      "groupName": "Helm chart updates"
+    },
+    {
+      "description": "Group container digest updates",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "digest",
+        "pinDigest"
+      ],
+      "groupName": "Container digest updates"
+    },
+    {
+      "description": "Keep major upgrades separate for review",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
