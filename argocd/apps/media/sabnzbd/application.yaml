@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: ghcr.io
     chart: bjw-s/helm/app-template
-    targetRevision: 3.6.1
+    targetRevision: 3.7.3
     helm:
       valueFiles:
       - $values/argocd/apps/media/sabnzbd/values.yaml

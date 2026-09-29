@@ -7,7 +7,7 @@ spec:
   sources:
   - repoURL: docker.io
     chart: envoyproxy/gateway-helm
-    targetRevision: 1.2.4
+    targetRevision: 1.9.2
     helm:
       valueFiles:
       - $values/argocd/apps/core/envoy-gateway/values.yaml
