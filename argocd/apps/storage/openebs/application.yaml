@@ -12,7 +12,7 @@ spec:
       valueFiles:
       - $values/argocd/apps/storage/openebs/values.yaml
     repoURL: https://openebs.github.io/openebs
-    targetRevision: 4.1.2
+    targetRevision: 4.6.1
   - repoURL: 'https://github.com/rcanderson23/homelab2.git'
     targetRevision: main
     ref: values
