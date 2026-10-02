@@ -10,7 +10,7 @@ spec:
   sources:
   - repoURL: https://charts.releases.teleport.dev
     chart: teleport-cluster
-    targetRevision: 18.11.2
+    targetRevision: 18.11.3
     helm:
       valueFiles:
       - $values/argocd/apps/development/teleport-cluster/values.yaml
