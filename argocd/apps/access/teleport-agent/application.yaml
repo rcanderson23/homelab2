@@ -7,7 +7,7 @@ spec:
   sources:
   - repoURL: https://charts.releases.teleport.dev
     chart: teleport-kube-agent
-    targetRevision: 18.11.2
+    targetRevision: 18.11.3
     helm:
       valueFiles:
       - $values/argocd/apps/access/teleport-agent/values.yaml
