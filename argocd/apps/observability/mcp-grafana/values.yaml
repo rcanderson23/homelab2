@@ -1,0 +1,41 @@
+fullnameOverride: mcp-grafana
+replicas: 1
+grafana:
+  url: http://grafana.grafana.svc.cluster.local:80
+  apiKeySecret:
+    name: mcp-grafana
+    key: GRAFANA_SERVICE_ACCOUNT_TOKEN
+extraArgs:
+- --transport=streamable-http
+- --address=0.0.0.0:8000
+- --allowed-hosts=mcp-grafana.grafana.svc.cluster.local:8000
+- --healthz-address=0.0.0.0:8080
+automountServiceAccountToken: false
+service:
+  type: ClusterIP
+  port: 8000
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  periodSeconds: 10
+  timeoutSeconds: 2
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+startupProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  periodSeconds: 5
+  failureThreshold: 30
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 512Mi

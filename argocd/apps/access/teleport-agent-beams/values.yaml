@@ -15,6 +15,14 @@ podMonitor:
   additionalLabels:
     release: kps
 apps:
+- name: mcp-grafana
+  uri: mcp+http://mcp-grafana.grafana.svc.cluster.local:8000/mcp
+  rewrite:
+    headers:
+    - "Host: mcp-grafana.grafana.svc.cluster.local:8000"
+  labels:
+    env: homelab
+    category: monitoring
 - name: grafana
   uri: http://grafana.grafana.svc.cluster.local.:80
   public_addr: grafana.carson-beams.beams.sh
