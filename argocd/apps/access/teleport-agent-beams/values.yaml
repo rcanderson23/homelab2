@@ -17,11 +17,11 @@ podMonitor:
 apps:
 - name: grafana
   uri: http://grafana.grafana.svc.cluster.local.:80
-  public_addr: grafana.carson.teleport.sh
+  public_addr: grafana.carson-beams.beams.sh
   rewrite:
     headers:
-    - "Origin: https://grafana.carson.teleport.sh"
-    - "Host: grafana.carson.teleport.sh"
+    - "Origin: https://grafana.carson-beams.beams.sh"
+    - "Host: grafana.carson-beams.beams.sh"
   labels:
     env: homelab
     category: monitoring
