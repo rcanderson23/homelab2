@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+  name: kubernetes-mcp-server
+  namespace: argocd
+spec:
+  sources:
+  - repoURL: ghcr.io
+    chart: containers/charts/kubernetes-mcp-server
+    targetRevision: 0.1.0
+    helm:
+      valueFiles:
+      - $values/argocd/apps/access/kubernetes-mcp-server/values.yaml
+  - repoURL: 'https://github.com/rcanderson23/homelab2.git'
+    targetRevision: main
+    ref: values
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubernetes-mcp-server

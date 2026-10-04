@@ -15,6 +15,11 @@ podMonitor:
   additionalLabels:
     release: kps
 apps:
+- name: kubernetes-mcp-server
+  uri: mcp+http://kubernetes-mcp-server.kubernetes-mcp-server.svc.cluster.local:8080/mcp
+  labels:
+    env: homelab
+    category: kubernetes
 - name: mcp-grafana
   uri: mcp+http://mcp-grafana.grafana.svc.cluster.local:8000/mcp
   rewrite:

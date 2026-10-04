@@ -1,0 +1,62 @@
+fullnameOverride: kubernetes-mcp-server
+replicaCount: 1
+image:
+  version: v0.0.67
+service:
+  type: ClusterIP
+  port: 8080
+ingress:
+  enabled: false
+config:
+  port: "8080"
+  read_only: true
+  toolsets:
+  - core
+  denied_resources:
+  - group: ""
+    version: v1
+    kind: Secret
+rbac:
+  create: true
+  extraClusterRoles:
+  - name: read-only
+    rules:
+    - apiGroups: [""]
+      resources:
+      - configmaps
+      - endpoints
+      - events
+      - namespaces
+      - nodes
+      - persistentvolumeclaims
+      - persistentvolumes
+      - pods
+      - pods/log
+      - replicationcontrollers
+      - resourcequotas
+      - limitranges
+      - serviceaccounts
+      - services
+      verbs: [get, list, watch]
+    - apiGroups:
+      - apps
+      - batch
+      - autoscaling
+      - policy
+      - networking.k8s.io
+      - storage.k8s.io
+      - metrics.k8s.io
+      - events.k8s.io
+      - argoproj.io
+      resources: ['*']
+      verbs: [get, list, watch]
+  extraClusterRoleBindings:
+  - name: read-only
+    roleRef:
+      name: read-only
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    memory: 512Mi
