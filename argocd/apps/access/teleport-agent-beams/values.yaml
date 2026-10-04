@@ -30,6 +30,11 @@ apps:
   labels:
     env: homelab
     category: monitoring
+- name: loki
+  uri: http://loki-headless.loki.svc.cluster.local.:3100
+  labels:
+    env: homelab
+    category: monitoring
 - name: alertmanager
   uri: http://kps-alertmanager.monitoring.svc.cluster.local.:9093
   labels:
