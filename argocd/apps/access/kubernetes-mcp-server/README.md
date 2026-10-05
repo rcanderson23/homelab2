@@ -8,8 +8,13 @@ new application automatically. Chart version `0.1.0` and server image
 The server uses its in-cluster service account to inspect homelab. Read-only
 mode exposes the core inspection tools, including pod logs. The chart creates
 a ClusterRole and binding with only get/list/watch permissions for common
-cluster resources, metrics, and Argo CD resources. Secrets and pod exec are
-not permitted. Other API groups require additional explicit RBAC rules.
+cluster resources, metrics, and the installed API groups explicitly listed in
+`values.yaml`. These include Cilium, CloudNativePG, cert-manager, Gateway API,
+Envoy Gateway, monitoring, Longhorn, MetalLB, DNS, GitHub runners, External
+Secrets configuration, and Kubernetes discovery, admission, and RBAC resources.
+Secrets, pod exec, and External Secrets generators are not permitted.
+Authentication and authorization review APIs have no additional grants.
+Other API groups require additional explicit RBAC rules.
 
 Both Teleport agents register the ClusterIP service's Streamable HTTP endpoint
 as `kubernetes-mcp-server`. No ingress or NetworkPolicy is configured.

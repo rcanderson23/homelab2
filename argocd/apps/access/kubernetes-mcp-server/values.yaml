@@ -26,12 +26,14 @@ rbac:
       - configmaps
       - endpoints
       - events
+      - componentstatuses
       - namespaces
       - nodes
       - persistentvolumeclaims
       - persistentvolumes
       - pods
       - pods/log
+      - podtemplates
       - replicationcontrollers
       - resourcequotas
       - limitranges
@@ -48,6 +50,34 @@ rbac:
       - metrics.k8s.io
       - events.k8s.io
       - argoproj.io
+      - cilium.io
+      - acme.cert-manager.io
+      - actions.github.com
+      - admissionregistration.k8s.io
+      - apiextensions.k8s.io
+      - apiregistration.k8s.io
+      - cert-manager.io
+      - certificates.k8s.io
+      - coordination.k8s.io
+      - deviceplugin.intel.com
+      - discovery.k8s.io
+      - external-secrets.io
+      - externaldns.k8s.io
+      - flowcontrol.apiserver.k8s.io
+      - fpga.intel.com
+      - gateway.envoyproxy.io
+      - gateway.networking.k8s.io
+      - gateway.networking.x-k8s.io
+      - longhorn.io
+      - metallb.io
+      - monitoring.coreos.com
+      - monitoring.grafana.com
+      - networking.homelabtech.net
+      - node.k8s.io
+      - postgresql.cnpg.io
+      - rbac.authorization.k8s.io
+      - resource.k8s.io
+      - scheduling.k8s.io
       resources: ['*']
       verbs: [get, list, watch]
   extraClusterRoleBindings:
