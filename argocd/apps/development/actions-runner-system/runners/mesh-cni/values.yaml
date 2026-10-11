@@ -22,13 +22,13 @@ template:
               topologyKey: "kubernetes.io/hostname"
     initContainers:
     - name: init-dind-externals
-      image: ghcr.io/actions/actions-runner:latest@sha256:e5496277be5d09bc968b3d64911b74e219ac4a3f2edce956a3ecf9271bea1ef4
+      image: ghcr.io/actions/actions-runner:latest@sha256:4ffadc0002b2581327e06101fc8c06cd189232baf79fe561fac9caeb76f5e807
       command: ["cp", "-r", "/home/runner/externals/.", "/home/runner/tmpDir/"]
       volumeMounts:
         - name: dind-externals
           mountPath: /home/runner/tmpDir
     - name: dind
-      image: docker:dind@sha256:3f3c01aaaebf7cce837356b688b7c059a4749f10bd7660dec7c58fc454a283f0
+      image: docker:dind@sha256:0b6d18a4a222e71c88be6034926b4f6cde2fc33c2218643d03ccfddc65995470
       args:
         - dockerd
         - --host=unix:///var/run/docker.sock
@@ -58,7 +58,7 @@ template:
           mountPath: /etc/docker
     containers:
     - name: runner
-      image: ghcr.io/actions/actions-runner:latest@sha256:e5496277be5d09bc968b3d64911b74e219ac4a3f2edce956a3ecf9271bea1ef4
+      image: ghcr.io/actions/actions-runner:latest@sha256:4ffadc0002b2581327e06101fc8c06cd189232baf79fe561fac9caeb76f5e807
       command:
       - /bin/sh
       - -c
